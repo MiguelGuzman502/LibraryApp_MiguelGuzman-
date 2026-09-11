@@ -7,4 +7,4 @@ el metodo es lo que esta instanciano un objeto
 
 4. ¿Para qué sirve un constructor?
 
-   
+   .
