@@ -1,5 +1,4 @@
 1. Clase
-Término técnico: Clase
 
 Definición formal: Molde que define los atributos y métodos que tendrán los objetos creados a partir de ella.
 
@@ -14,7 +13,6 @@ Ejemplo: public class Libro
 Problema que resuelve: Evita que hagamos las cosas a lo loco y ayuda a organizarnos.
 
 2. Objeto
-Término técnico: Objeto
 
 Definición formal: Instancia particular de una clase que posee un estado propio y un comportamiento definido.
 
@@ -29,7 +27,7 @@ Ejemplo: Libro miLibro = new Libro("Java 21");
 Problema que resuelve: Organiza el código agrupando las características de un elemento en un solo lugar.
 
 3. Encapsulamiento
-Término técnico: Encapsulamiento
+
 
 Definición formal: Mecanismo de la POO que oculta el estado interno de los objetos y restringe el acceso directo a los atributos usando modificadores de acceso.
 
@@ -44,7 +42,7 @@ Ejemplo: private String titulo;
 Problema que resuelve: Evita que el programa se altere o arruine los datos importantes por error.
 
 4. MVC (Modelo - Vista - Controlador)
-Término técnico: MVC (Modelo - Vista - Controlador)
+
 
 Definición formal: Patrón de arquitectura de software que separa los datos, la interfaz de usuario y la lógica de control en tres componentes distintos.
 
@@ -59,7 +57,7 @@ Ejemplo: El archivo FXML muestra la ventana, el controlador hace que funcione el
 Problema que resuelve: Evita tener todo el código revuelto en un solo archivo facilitando el orden y mantenimiento.
 
 5. DAO (Data Access Object)
-Término técnico: DAO (Data Access Object)
+
 
 Definición formal: Patrón de diseño que separa la lógica de persistencia y conexión a la base de datos del resto de la aplicación.
 
@@ -74,7 +72,6 @@ Ejemplo: public boolean insertarLibro(Libro libro)
 Problema que resuelve: Evita que las consultas SQL estén regadas por todo el programa, guardándolas en un solo lugar.
 
 6. CRUD (Create, Read, Update, Delete)
-Término técnico: CRUD (Create, Read, Update, Delete)
 
 Definición formal: Acrónimo que describe las cuatro operaciones fundamentales de almacenamiento persistente: Creación, Lectura, Actualización y Borrado.
 
@@ -89,7 +86,7 @@ Ejemplo: Sentencias SQL como INSERT, SELECT, UPDATE y DELETE.
 Problema que resuelve: Cambia la forma en que se interactúa con los registros de la base de datos de manera ordenada.
 
 7. JDBC (Java Database Connectivity)
-Término técnico: JDBC (Java Database Connectivity)
+
 
 Definición formal: API de Java que permite la ejecución de operaciones independientes entre una aplicación Java y una base de datos relacional.
 
@@ -104,7 +101,7 @@ Ejemplo: Connection cn = DriverManager.getConnection(URL, USER, PASS);
 Problema que resuelve: Permite la comunicación entre Java y la base de datos.
 
 8. Connection
-Término técnico: Connection
+
 
 Definición formal: Interfaz de Java que representa una sesión de comunicación física con una base de datos específica.
 
@@ -119,7 +116,7 @@ Ejemplo: El objeto Connection que usamos para iniciar el canal con MySQL.
 Problema que resuelve: Evita la ejecución de consultas sin estar conectado a una base de datos real en SQL.
 
 9. ResultSet
-Término técnico: ResultSet
+
 
 Definición formal: Objeto que representa un conjunto de resultados de una consulta tabular, sirviendo como cursor para recorrer fila por fila los datos obtenidos.
 
@@ -134,7 +131,7 @@ Ejemplo: ResultSet resultado = sentencia.executeQuery();
 Problema que resuelve: Permite leer de forma ordenada y fila por fila la información que nos manda la base de datos.
 
 10. FXML
-Término técnico: FXML
+
 
 Definición formal: Lenguaje basado en XML utilizado para definir la estructura de la interfaz de usuario en aplicaciones JavaFX de manera independiente al código fuente.
 
@@ -149,7 +146,7 @@ Ejemplo: <Button layoutX="50" layoutY="100" text="Guardar"/>
 Problema que resuelve: Separa el diseño visual de la pantalla del código de Java, haciendo todo más ordenado.
 
 11. SceneBuilder
-Término técnico: SceneBuilder
+
 
 Definición formal: Herramienta visual de diseño gráfico interactivo para la creación rápida de interfaces de usuario en aplicaciones JavaFX.
 
@@ -164,7 +161,7 @@ Ejemplo: Cuando arrastras una tabla (TableView) hacia el centro de la pantalla c
 Problema que resuelve: Evita tener que calcular coordenadas a mano en archivos de texto para acomodar los elementos visuales.
 
 12. @FXML
-Término técnico: @FXML
+
 
 Definición formal: Anotación de Java utilizada para vincular los componentes gráficos definidos en un archivo FXML con las variables y métodos de su clase controladora.
 
@@ -179,7 +176,6 @@ Ejemplo: @FXML private TextField txtTitulo;
 Problema que resuelve: Evita que el controlador pierda de vista o ignore los elementos visuales de pantalla.
 
 13. TableView
-Término técnico: TableView
 
 Definición formal: Control de interfaz de usuario en JavaFX para visualizar y editar datos tabulares distribuidos en filas y columnas.
 
@@ -194,7 +190,7 @@ Ejemplo: <TableView fx:id="tblLibros"/>
 Problema que resuelve: Facilita mostrar muchos datos al mismo tiempo sin que se vea un relajo en la pantalla.
 
 14. ObservableList
-Término técnico: ObservableList
+
 
 Definición formal: Lista especializada de JavaFX que permite a los escuchas rastrear cambios en sus elementos, notificando automáticamente a la interfaz gráfica.
 
@@ -209,7 +205,7 @@ Ejemplo: ObservableList<Libro> lista = FXCollections.observableArrayList();
 Problema que resuelve: Evita tener que cerrar y volver a abrir la ventana para ver reflejados los cambios nuevos en la base de datos.
 
 15. Singleton
-Término técnico: Singleton
+
 
 Definición formal: Patrón de diseño creacional que garantiza que una clase tenga una única instancia en todo el programa y proporciona un punto de acceso global a ella.
 
@@ -224,7 +220,7 @@ Ejemplo: Un método getInstancia() que revisa si el objeto ya existe antes de cr
 Problema que resuelve: Evita que se creen múltiples conexiones idénticas por accidente que saturen la computadora o la base de datos.
 
 16. Excepción
-Término técnico: Excepción
+
 
 Definición formal: Evento que ocurre durante la ejecución de un programa y que interrumpe el flujo normal de las instrucciones debido a un error.
 
@@ -239,7 +235,7 @@ Ejemplo: try { ... } catch (Exception e) { e.printStackTrace(); }
 Problema que resuelve: Evita que el programa se cierre de golpe; permite atrapar el error y avisarle al usuario qué pasó.
 
 17. Interfaz
-Término técnico: Interfaz
+
 
 Definición formal: Contrato de programación en Java que declara un conjunto de métodos abstractos que una clase está obligada a implementar.
 
@@ -254,7 +250,7 @@ Ejemplo: public interface LibroDAO { boolean insertar(Libro libro); List<Libro> 
 Problema que resuelve: Evita que se te olvide programar funciones importantes; te obliga a seguir las reglas exactas para que el programa no falle.
 
 18. Polimorfismo
-Término técnico: Polimorfismo
+
 
 Definición formal: Principio de la Programación Orientada a Objetos que permite que objetos de distintas clases respondan de manera diferente a una misma invocación de método.
 
@@ -267,3 +263,29 @@ Ejemplo práctico & problema que resuelve:
 Ejemplo: Un método general que procesa acciones de guardado, donde cada entidad ejecuta su propia versión del método.
 
 Problema que resuelve: Evita la duplicación de código y la creación de múltiples nombres de funciones para tareas similares.
+
+19. Tipo Primitivo
+    Definición formal: Tipo de dato básico predefinido por el lenguaje Java que almacena valores simples directamente en la memoria.
+
+    Definición en mis palabras: un dato basico que guarda  un valor como un numero entero o decimal
+
+     Ubicación en el código: Al declarar variables simples dentro de los atributos de un modelo o métodos.
+
+    jemplo práctico & problema que resuelve:
+
+Ejemplo: int stock = 10; o double precio = 45.50;
+
+Problema que resuelve: Permite almacenar datos numéricos o básicos de manera rápida
+
+20. Clase Wrapper
+ Definición formal: Clase que envuelve o encapsula un tipo de dato primitivo en un objeto, permitiendo tratarlo como una referencia y usar métodos adicionales.
+
+Definición en mis palabras: es una clase que convierte un dato por ejemplo un numero entero lo convierte en un objeto 
+Ubicación en el código: cuando pasamos parámetros que requieren objetos como en listas o bases de datos
+
+Ejemplo práctico & problema que resuelve:
+
+Ejemplo: Integer idLibro = 5; (en lugar de usar int).
+Permite que los datos  acepten valores nulos (null) y puedan ser utilizados en  JavaFX u otras estructuras que solo aceptan objetos.
+
+    
