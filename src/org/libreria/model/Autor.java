@@ -5,8 +5,7 @@ package org.libreria.model;
  * Representa un autor dentro del sistema de librería.
  * Contiene la información del autor, incluyendo su nombre,
  * apellido, nacionalidad y biografía.
- *
- * @author Miguel Guzman
+ * * @author Miguel Guzman
  * @version 1.0.0
  */
 public class Autor {
@@ -25,7 +24,6 @@ public class Autor {
 
     /**
      * Crea un objeto Autor con la información proporcionada.
-     *
      * @param idAutor Identificador del autor.
      * @param nombreAutor Nombre del autor.
      * @param apellidoAutor Apellido del autor.
@@ -43,7 +41,6 @@ public class Autor {
 
     /**
      * Obtiene el identificador del autor.
-     *
      * @return El identificador del autor.
      */
     public int getIdAutor() {
@@ -52,7 +49,6 @@ public class Autor {
 
     /**
      * Modifica el identificador del autor.
-     *
      * @param idAutor Nuevo identificador del autor.
      */
     public void setIdAutor(int idAutor) {
@@ -61,7 +57,6 @@ public class Autor {
 
     /**
      * Obtiene el nombre del autor.
-     *
      * @return El nombre del autor.
      */
     public String getNombreAutor() {
@@ -70,7 +65,6 @@ public class Autor {
 
     /**
      * Modifica el nombre del autor.
-     *
      * @param nombreAutor Nuevo nombre del autor.
      */
     public void setNombreAutor(String nombreAutor) {
@@ -79,7 +73,6 @@ public class Autor {
 
     /**
      * Obtiene el apellido del autor.
-     *
      * @return El apellido del autor.
      */
     public String getApellidoAutor() {
@@ -88,7 +81,6 @@ public class Autor {
 
     /**
      * Modifica el apellido del autor.
-     *
      * @param apellidoAutor Nuevo apellido del autor.
      */
     public void setApellidoAutor(String apellidoAutor) {
@@ -97,7 +89,6 @@ public class Autor {
 
     /**
      * Obtiene la nacionalidad del autor.
-     *
      * @return La nacionalidad del autor.
      */
     public String getNacionalidad() {
@@ -106,7 +97,6 @@ public class Autor {
 
     /**
      * Modifica la nacionalidad del autor.
-     *
      * @param nacionalidad Nueva nacionalidad del autor.
      */
     public void setNacionalidad(String nacionalidad) {
@@ -115,7 +105,6 @@ public class Autor {
 
     /**
      * Obtiene la biografía del autor.
-     *
      * @return La biografía del autor.
      */
     public String getBiografia() {
@@ -124,7 +113,6 @@ public class Autor {
 
     /**
      * Modifica la biografía del autor.
-     *
      * @param biografia Nueva biografía del autor.
      */
     public void setBiografia(String biografia) {
@@ -133,7 +121,6 @@ public class Autor {
 
     /**
      * Devuelve el nombre completo del autor como representación textual del objeto.
-     *
      * @return El nombre y apellido del autor.
      */
     @Override

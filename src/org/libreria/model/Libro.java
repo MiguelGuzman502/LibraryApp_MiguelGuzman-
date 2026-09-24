@@ -5,7 +5,6 @@ package org.libreria.model;
  * Representa un libro dentro del sistema de librería.
  * Contiene la información principal del libro, como ISBN,
  * título, fecha de publicación, precio, categoría, editorial y stock.
- *
  * @author Miguel Guzman 
  * @version 1.0.0
  */
@@ -21,7 +20,6 @@ public class Libro {
 
     /**
      * Crea un nuevo objeto Libro con la información proporcionada.
-     *
      * @param isbn Código ISBN que identifica al libro.
      * @param titulo Título del libro.
      * @param fechaPublicacion Fecha en que fue publicado el libro.
@@ -44,7 +42,6 @@ public class Libro {
 
     /**
      * Obtiene el ISBN del libro.
-     *
      * @return El ISBN del libro.
      */
     public String getIsbn() {
@@ -53,7 +50,6 @@ public class Libro {
 
     /**
      * Modifica el ISBN del libro.
-     *
      * @param isbn Nuevo ISBN del libro.
      */
     public void setIsbn(String isbn) {
@@ -62,7 +58,6 @@ public class Libro {
 
     /**
      * Obtiene el título del libro.
-     *
      * @return El título del libro.
      */
     public String getTitulo() {
@@ -71,7 +66,7 @@ public class Libro {
 
     /**
      * Modifica el título del libro.
-     *
+
      * @param titulo Nuevo título del libro.
      */
     public void setTitulo(String titulo) {
@@ -80,7 +75,6 @@ public class Libro {
 
     /**
      * Obtiene la fecha de publicación del libro.
-     *
      * @return La fecha de publicación.
      */
     public String getFechaPublicacion() {
@@ -89,7 +83,6 @@ public class Libro {
 
     /**
      * Modifica la fecha de publicación del libro.
-     *
      * @param fechaPublicacion Nueva fecha de publicación.
      */
     public void setFechaPublicacion(String fechaPublicacion) {
@@ -98,7 +91,6 @@ public class Libro {
 
     /**
      * Obtiene el precio del libro.
-     *
      * @return El precio del libro.
      */
     public double getPrecio() {
@@ -107,7 +99,6 @@ public class Libro {
 
     /**
      * Modifica el precio del libro.
-     *
      * @param precio Nuevo precio del libro.
      */
     public void setPrecio(double precio) {
@@ -116,7 +107,6 @@ public class Libro {
 
     /**
      * Obtiene el identificador de la categoría del libro.
-     *
      * @return El ID de la categoría.
      */
     public int getIdCategoria() {
@@ -125,7 +115,6 @@ public class Libro {
 
     /**
      * Modifica el identificador de la categoría del libro.
-     *
      * @param idCategoria Nuevo ID de la categoría.
      */
     public void setIdCategoria(int idCategoria) {
@@ -134,7 +123,6 @@ public class Libro {
 
     /**
      * Obtiene el NIT de la editorial del libro.
-     *
      * @return El NIT de la editorial.
      */
     public String getNitEditorial() {
@@ -143,7 +131,6 @@ public class Libro {
 
     /**
      * Modifica el NIT de la editorial del libro.
-     *
      * @param nitEditorial Nuevo NIT de la editorial.
      */
     public void setNitEditorial(String nitEditorial) {
@@ -152,7 +139,6 @@ public class Libro {
 
     /**
      * Obtiene la cantidad disponible del libro.
-     *
      * @return La cantidad de libros disponibles en stock.
      */
     public int getStock() {
@@ -161,7 +147,6 @@ public class Libro {
 
     /**
      * Modifica la cantidad disponible del libro.
-     *
      * @param stock Nueva cantidad disponible en stock.
      */
     public void setStock(int stock) {
@@ -170,7 +155,6 @@ public class Libro {
 
     /**
      * Devuelve el título del libro como representación textual del objeto.
-     *
      * @return El título del libro.
      */
     @Override

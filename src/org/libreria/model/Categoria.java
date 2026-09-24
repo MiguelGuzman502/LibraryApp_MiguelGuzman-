@@ -5,7 +5,6 @@ package org.libreria.model;
  * Representa una categoría dentro del sistema de librería.
  * Contiene el identificador y el nombre de la categoría
  * utilizada para clasificar los libros.
- *
  * @author Miguel Guzman 
  * @version 1.0.0
  */
@@ -22,7 +21,6 @@ public class Categoria {
 
     /**
      * Crea un objeto Categoria con la información proporcionada.
-     *
      * @param idCategoria Identificador de la categoría.
      * @param nombreCategoria Nombre de la categoría.
      */
@@ -33,7 +31,6 @@ public class Categoria {
 
     /**
      * Obtiene el identificador de la categoría.
-     *
      * @return El identificador de la categoría.
      */
     public int getIdCategoria() {
@@ -42,7 +39,6 @@ public class Categoria {
 
     /**
      * Modifica el identificador de la categoría.
-     *
      * @param idCategoria Nuevo identificador de la categoría.
      */
     public void setIdCategoria(int idCategoria) {
@@ -51,7 +47,6 @@ public class Categoria {
 
     /**
      * Obtiene el nombre de la categoría.
-     *
      * @return El nombre de la categoría.
      */
     public String getNombreCategoria() {
@@ -60,7 +55,6 @@ public class Categoria {
 
     /**
      * Modifica el nombre de la categoría.
-     *
      * @param nombreCategoria Nuevo nombre de la categoría.
      */
     public void setNombreCategoria(String nombreCategoria) {
@@ -69,7 +63,6 @@ public class Categoria {
 
     /**
      * Devuelve el nombre de la categoría como representación textual del objeto.
-     *
      * @return El nombre de la categoría.
      */
     @Override

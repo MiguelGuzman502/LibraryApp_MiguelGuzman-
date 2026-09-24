@@ -5,7 +5,6 @@ package org.libreria.model;
  * Representa el detalle de una venta dentro del sistema de librería
  * Contiene información sobre el libro vendido, la cantidad
  * el precio y la venta que pertenece
- *
  * @author Miguel Guzman
  * @version 1.0.0
  */
@@ -25,7 +24,6 @@ public class DetalleVenta {
 
     /**
      * Crea un objeto DetalleVenta con la información proporcionada
-     *
      * @param idDetalleVenta Identificador del detalle de la venta
      * @param noVenta Número de la venta a la que pertenece el detalle
      * @param isbn ISBN del libro incluido en la venta
@@ -43,7 +41,6 @@ public class DetalleVenta {
 
     /**
      * Obtiene el identificador del detalle de la venta
-     *
      * @return El identificador del detalle
      */
     public int getIdDetalleVenta() {
@@ -52,7 +49,6 @@ public class DetalleVenta {
 
     /**
      * Modifica el identificador del detalle de la venta
-     *
      * @param idDetalleVenta Nuevo identificador del detalle
      */
     public void setIdDetalleVenta(int idDetalleVenta) {
@@ -61,7 +57,6 @@ public class DetalleVenta {
 
     /**
      * Obtiene el número de la venta
-     *
      * @return El número de la venta
      */
     public int getNoVenta() {
@@ -70,7 +65,6 @@ public class DetalleVenta {
 
     /**
      * Modifica el número de la venta
-     *
      * @param noVenta Nuevo número de la venta
      */
     public void setNoVenta(int noVenta) {
@@ -79,7 +73,6 @@ public class DetalleVenta {
 
     /**
      * Obtiene el ISBN del libro vendido
-     *
      * @return El ISBN del libro
      */
     public String getIsbn() {
@@ -88,7 +81,6 @@ public class DetalleVenta {
 
     /**
      * Modifica el ISBN del libro vendido
-     *
      * @param isbn Nuevo ISBN del libro
      */
     public void setIsbn(String isbn) {
@@ -97,7 +89,6 @@ public class DetalleVenta {
 
     /**
      * Obtiene la cantidad de unidades vendidas
-     *
      * @return La cantidad de unidades
      */
     public int getCantidad() {
@@ -106,7 +97,6 @@ public class DetalleVenta {
 
     /**
      * Modifica la cantidad de unidades vendidas
-     *
      * @param cantidad Nueva cantidad de unidades
      */
     public void setCantidad(int cantidad) {
@@ -115,7 +105,6 @@ public class DetalleVenta {
 
     /**
      * Obtiene el precio del libro en la venta
-     *
      * @return El precio del libro
      */
     public double getPrecio() {
@@ -124,7 +113,6 @@ public class DetalleVenta {
 
     /**
      * Modifica el precio del libro en la venta
-     *
      * @param precio Nuevo precio del libro
      */
     public void setPrecio(double precio) {
