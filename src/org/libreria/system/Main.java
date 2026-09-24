@@ -1,19 +1,14 @@
-
 package org.libreria.system;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//import javafx.application.Application;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Parent;
-//import javafx.scene.Scene;
-//import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 import org.libreria.model.Usuario;
-// Importar SesionContext desde su paquete correspondiente
-// import org.libreria.manager.SesionContext;
+
 /**
  * Clase principal de la aplicación de librería.
  * Se encarga de iniciar la aplicación JavaFX, administrar
@@ -24,7 +19,7 @@ import org.libreria.model.Usuario;
  */
 public class Main extends Application {
 
-   // private static Stage escenarioPrincipal;
+    private static Stage escenarioPrincipal;
 
     private static final Logger log =
             Logger.getLogger(Main.class.getName());
@@ -37,13 +32,15 @@ public class Main extends Application {
      */
     public static void cambiarEscena(String rutaFXML) throws IOException {
         log.log(Level.INFO, "Se cambio de escena a: {0}", rutaFXML);
-       // Parent raiz = FXMLLoader.load(
-               // Main.class.getResource(rutaFXML));
-       // Scene escena = new Scene(raiz);
-        //escenarioPrincipal.setScene(escena);
-        //escenarioPrincipal.sizeToScene();
-        //escenarioPrincipal.centerOnScreen();
-        //escenarioPrincipal.show();
+
+        Parent raiz = FXMLLoader.load(
+                Main.class.getResource(rutaFXML));
+
+        Scene escena = new Scene(raiz);
+        escenarioPrincipal.setScene(escena);
+        escenarioPrincipal.sizeToScene();
+        escenarioPrincipal.centerOnScreen();
+        escenarioPrincipal.show();
     }
 
     /**
@@ -55,29 +52,41 @@ public class Main extends Application {
      * según el rol del usuario.
      */
     public static String rutaDashboardSegunRol() {
+
+   
         Usuario usuario =
-                //SesionContext.getInstancia().getUsuarioActual();
-        //if (usuario == null || usuario.getRol() == null) {
-            return "/org/ac/view/fxml/InicioSesionView.fxml";
+                SesionContext.getInstancia().getUsuarioActual();
+
+        if (usuario == null || usuario.getRol() == null) {
+            return "/org/libreria/view/fxml/InicioSesionView.fxml";
         }
+
         switch (usuario.getRol().toLowerCase()) {
             case "admin":
                 return "/org/libreria/view/fxml/AdminDashboradView.fxml";
+
             case "empleado":
                 return "/org/libreria/view/fxml/EmpleadoView.fxml";
+
             case "cajero":
                 return "/org/libreria/view/fxml/CajeroView.fxml";
+
             default:
                 return "/org/libreria/view/fxml/InicioSesionView.fxml";
         }
+
+
+        return "/org/libreria/view/fxml/InicioSesionView.fxml";
     }
+
     /**
      * Método principal que inicia la ejecución de la aplicación.
      * @param args Argumentos proporcionados al iniciar el programa.
      */
     public static void main(String[] args) {
         log.info("Se inicio el programa");
-        //launch(args);
+
+        // launch(args);
     }
 
     /**
@@ -86,7 +95,12 @@ public class Main extends Application {
      * @param escenarioPrincipal Escenario principal de la aplicación.
      * @throws Exception si ocurre un error durante el inicio de la aplicación.
      */
-   // @Override
-      //ublic void start(Stage escenarioPrincipal) throws Exception {
-        //Main.escenarioPrincipal = escenarioPrincipal;
-       // cambiarEscena("/org/libreria/view/fxml/InicioSesionView.fxml");
+    @Override
+    public void start(Stage escenarioPrincipal) throws Exception {
+
+        Main.escenarioPrincipal = escenarioPrincipal;
+
+        cambiarEscena(
+                "/org/libreria/view/fxml/InicioSesionView.fxml");
+    }
+}
