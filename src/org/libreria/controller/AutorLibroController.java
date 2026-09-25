@@ -1,4 +1,3 @@
-
 package org.libreria.controller;
 
 import java.net.URL;
@@ -21,7 +20,7 @@ import org.libreria.DAO.AutorLibroDAO;
 import org.libreria.DAO.LibroDAO;
 import org.libreria.DAOImpl.AutorDAOImpl;
 import org.libreria.DAOImpl.AutorLibroDAOImpl;
-import org.libreria.dao.impl.LibroDAOImpl;
+import org.libreria.DAOImpl.LibroDAOImpl;
 import org.libreria.exception.DaoException;
 import org.libreria.exception.ValidacionException;
 import org.libreria.model.Autor;
@@ -29,45 +28,73 @@ import org.libreria.model.AutorLibro;
 import org.libreria.model.Libro;
 import org.libreria.system.Main;
 
+/**
+ * Controlador para gestionar las relaciones entre autores y libros.
+ * @author Miguel Guzman
+ * @version 1.0.0
+ */
 public class AutorLibroController implements Initializable {
 
     @FXML
     private ComboBox<Autor> cmbAutor;
+
     @FXML
     private ComboBox<Libro> cmbLibro;
+
     @FXML
     private Label lblMensaje;
+
     @FXML
     private TableView<AutorLibro> tablaAutoresLibro;
+
     @FXML
     private TableColumn colIdAutorLibro;
+
     @FXML
     private TableColumn colIdAutor;
+
     @FXML
     private TableColumn colIsbn;
+
     @FXML
     private Button btnNuevo;
+
     @FXML
     private Button btnEditar;
+
     @FXML
     private Button btnPrimero;
+
     @FXML
     private Button btnAnterior;
+
     @FXML
     private Button btnSiguiente;
+
     @FXML
     private Button btnUltimo;
+
     @FXML
     private TextField txtBuscar;
 
     private boolean modoEdicion = false;
     private AutorLibro enEdicion;
+
     private final AutorLibroDAO autorLibroDAO = new AutorLibroDAOImpl();
     private final AutorDao autorDAO = new AutorDAOImpl();
     private final LibroDAO libroDAO = new LibroDAOImpl();
-    private final ObservableList<AutorLibro> listaAutoresLibro = FXCollections.observableArrayList();
-    private final FilteredList<AutorLibro> autoresLibroFiltrados = new FilteredList<>(listaAutoresLibro, p -> true);
 
+    private final ObservableList<AutorLibro> listaAutoresLibro
+            = FXCollections.observableArrayList();
+
+    private final FilteredList<AutorLibro> autoresLibroFiltrados
+            = new FilteredList<>(listaAutoresLibro, p -> true);
+
+    /**
+     * Inicializa el controlador y configura la tabla, combos y búsqueda.
+     * @param location Ubicación utilizada para resolver recursos.
+     * @param resources Recursos utilizados por la interfaz.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cargarTabla();
@@ -78,12 +105,24 @@ public class AutorLibroController implements Initializable {
         configurarBusqueda();
     }
 
+    /**
+     * Configura las columnas de la tabla.
+     */
     public void configurarTabla() {
-        colIdAutorLibro.setCellValueFactory(new PropertyValueFactory<AutorLibro, Integer>("idAutorLibro"));
-        colIdAutor.setCellValueFactory(new PropertyValueFactory<AutorLibro, Integer>("idAutor"));
-        colIsbn.setCellValueFactory(new PropertyValueFactory<AutorLibro, String>("isbn"));
+        colIdAutorLibro.setCellValueFactory(
+                new PropertyValueFactory<AutorLibro, Integer>("idAutorLibro"));
+
+        colIdAutor.setCellValueFactory(
+                new PropertyValueFactory<AutorLibro, Integer>("idAutor"));
+
+        colIsbn.setCellValueFactory(
+                new PropertyValueFactory<AutorLibro, String>("isbn"));
     }
 
+    /**
+     * Carga las relaciones entre autores y libros en la tabla.
+     * @throws DaoException Si ocurre un error al consultar los datos.
+     */
     private void cargarTabla() {
         try {
             listaAutoresLibro.setAll(autorLibroDAO.listarTodos());
@@ -92,60 +131,90 @@ public class AutorLibroController implements Initializable {
         }
     }
 
+    /**
+     * Carga los autores y libros disponibles en los combos.
+     * @throws DaoException Si ocurre un error al cargar los datos.
+     */
     private void cargarCombos() {
         try {
-            cmbAutor.setItems(FXCollections.observableArrayList(autorDAO.listarTodos()));
-            cmbLibro.setItems(FXCollections.observableArrayList(libroDAO.listarTodos()));
+            cmbAutor.setItems(
+                    FXCollections.observableArrayList(autorDAO.listarTodos()));
+
+            cmbLibro.setItems(
+                    FXCollections.observableArrayList(libroDAO.listarTodos()));
         } catch (DaoException e) {
             mostrarError(e.getMessage());
         }
     }
 
+    /**
+     * Configura el campo de búsqueda.
+     */
     private void configurarBusqueda() {
-        txtBuscar.textProperty().addListener((obs, oldValue, newValue) -> filtrarAutoresLibro());
+        txtBuscar.textProperty().addListener(
+                (obs, oldValue, newValue) -> filtrarAutoresLibro());
     }
 
+    /**
+     * Filtra las relaciones de autores y libros según el texto ingresado.
+     */
     private void filtrarAutoresLibro() {
         String busqueda = txtBuscar.getText().trim().toLowerCase();
+
         if (busqueda.isEmpty()) {
             autoresLibroFiltrados.setPredicate(p -> true);
         } else {
-            autoresLibroFiltrados.setPredicate(autorLibro ->
-                    String.valueOf(autorLibro.getIdAutorLibro()).contains(busqueda)
+            autoresLibroFiltrados.setPredicate(autorLibro
+                    -> String.valueOf(autorLibro.getIdAutorLibro()).contains(busqueda)
                     || String.valueOf(autorLibro.getIdAutor()).contains(busqueda)
                     || autorLibro.getIsbn().toLowerCase().contains(busqueda));
         }
     }
 
+    /**
+     * Detecta la fila seleccionada y muestra sus datos en los combos.
+     */
     private void seleccionarFila() {
         tablaAutoresLibro.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> {
+
                     if (newSelection != null) {
+
                         cmbAutor.setValue(null);
+
                         for (Autor autor : cmbAutor.getItems()) {
                             if (autor.getIdAutor() == newSelection.getIdAutor()) {
                                 cmbAutor.setValue(autor);
                                 break;
                             }
                         }
+
                         cmbLibro.setValue(null);
+
                         for (Libro libro : cmbLibro.getItems()) {
                             if (libro.getIsbn().equals(newSelection.getIsbn())) {
                                 cmbLibro.setValue(libro);
                                 break;
                             }
                         }
+
                         desactivarFormulario();
                     }
                 });
     }
 
+    /**
+     * Guarda una nueva relación o actualiza una existente.
+     */
     @FXML
     private void handleGuardar() {
         try {
-            ValidacionException.validarNoNulo(cmbAutor.getValue(),
+            ValidacionException.validarNoNulo(
+                    cmbAutor.getValue(),
                     "Seleccione un autor.");
-            ValidacionException.validarNoNulo(cmbLibro.getValue(),
+
+            ValidacionException.validarNoNulo(
+                    cmbLibro.getValue(),
                     "Seleccione un libro.");
 
             AutorLibro autorLibro = new AutorLibro(
@@ -154,6 +223,7 @@ public class AutorLibroController implements Initializable {
                     cmbLibro.getValue().getIsbn());
 
             boolean guardado;
+
             if (modoEdicion) {
                 guardado = autorLibroDAO.actualizar(autorLibro);
             } else {
@@ -161,25 +231,33 @@ public class AutorLibroController implements Initializable {
             }
 
             if (guardado) {
-                lblMensaje.setText(modoEdicion
-                        ? "Relación autor-libro actualizada exitosamente."
-                        : "Relación autor-libro registrada exitosamente.");
+                lblMensaje.setText(
+                        modoEdicion
+                                ? "Relación autor-libro actualizada exitosamente."
+                                : "Relación autor-libro registrada exitosamente.");
+
                 cargarTabla();
                 limpiarFormulario();
                 desactivarFormulario();
                 activarNavegacion();
                 modoEdicion = false;
+
             } else {
                 mostrarError("No se pudo guardar la relación autor-libro.");
             }
+
         } catch (ValidacionException e) {
             mostrarAdvertencia(e.getMessage());
             lblMensaje.setText(e.getMessage());
+
         } catch (Exception e) {
             mostrarError("Error al guardar: " + e.getMessage());
         }
     }
 
+    /**
+     * Cancela la operación actual y limpia el formulario.
+     */
     @FXML
     private void handleCancelar() {
         limpiarFormulario();
@@ -190,6 +268,9 @@ public class AutorLibroController implements Initializable {
         lblMensaje.setText("");
     }
 
+    /**
+     * Prepara el formulario para registrar una nueva relación.
+     */
     @FXML
     private void handleNuevo() {
         modoEdicion = false;
@@ -202,13 +283,20 @@ public class AutorLibroController implements Initializable {
         cmbAutor.requestFocus();
     }
 
+    /**
+     * Prepara el formulario para editar la relación seleccionada.
+     */
     @FXML
     private void handleEditar() {
-        AutorLibro seleccion = tablaAutoresLibro.getSelectionModel().getSelectedItem();
+        AutorLibro seleccion
+                = tablaAutoresLibro.getSelectionModel().getSelectedItem();
+
         if (seleccion == null) {
-            mostrarError("Seleccione una relación autor-libro de la tabla para editar.");
+            mostrarError(
+                    "Seleccione una relación autor-libro de la tabla para editar.");
             return;
         }
+
         modoEdicion = true;
         enEdicion = seleccion;
         activarFormulario();
@@ -216,6 +304,9 @@ public class AutorLibroController implements Initializable {
         lblMensaje.setText("");
     }
 
+    /**
+     * Selecciona el primer registro de la tabla.
+     */
     @FXML
     private void handlePrimero() {
         if (!tablaAutoresLibro.getItems().isEmpty()) {
@@ -224,34 +315,51 @@ public class AutorLibroController implements Initializable {
         }
     }
 
+    /**
+     * Selecciona el registro anterior de la tabla.
+     */
     @FXML
     private void handleAnterior() {
         if (!tablaAutoresLibro.getItems().isEmpty()) {
             tablaAutoresLibro.getSelectionModel().selectPrevious();
+
             if (tablaAutoresLibro.getSelectionModel().getSelectedIndex() >= 0) {
-                tablaAutoresLibro.scrollTo(tablaAutoresLibro.getSelectionModel().getSelectedIndex());
+                tablaAutoresLibro.scrollTo(
+                        tablaAutoresLibro.getSelectionModel().getSelectedIndex());
             }
         }
     }
 
+    /**
+     * Selecciona el siguiente registro de la tabla.
+     */
     @FXML
     private void handleSiguiente() {
         if (!tablaAutoresLibro.getItems().isEmpty()) {
             tablaAutoresLibro.getSelectionModel().selectNext();
+
             if (tablaAutoresLibro.getSelectionModel().getSelectedIndex() >= 0) {
-                tablaAutoresLibro.scrollTo(tablaAutoresLibro.getSelectionModel().getSelectedIndex());
+                tablaAutoresLibro.scrollTo(
+                        tablaAutoresLibro.getSelectionModel().getSelectedIndex());
             }
         }
     }
 
+    /**
+     * Selecciona el último registro de la tabla.
+     */
     @FXML
     private void handleUltimo() {
         if (!tablaAutoresLibro.getItems().isEmpty()) {
             tablaAutoresLibro.getSelectionModel().selectLast();
-            tablaAutoresLibro.scrollTo(tablaAutoresLibro.getItems().size() - 1);
+            tablaAutoresLibro.scrollTo(
+                    tablaAutoresLibro.getItems().size() - 1);
         }
     }
 
+    /**
+     * Regresa al menú principal según el rol del usuario.
+     */
     @FXML
     private void handleVolver() {
         try {
@@ -261,21 +369,33 @@ public class AutorLibroController implements Initializable {
         }
     }
 
+    /**
+     * Limpia los valores del formulario.
+     */
     private void limpiarFormulario() {
         cmbAutor.setValue(null);
         cmbLibro.setValue(null);
     }
 
+    /**
+     * Activa los controles del formulario.
+     */
     private void activarFormulario() {
         cmbAutor.setDisable(false);
         cmbLibro.setDisable(false);
     }
 
+    /**
+     * Desactiva los controles del formulario.
+     */
     private void desactivarFormulario() {
         cmbAutor.setDisable(true);
         cmbLibro.setDisable(true);
     }
 
+    /**
+     * Activa los controles de navegación y búsqueda.
+     */
     private void activarNavegacion() {
         tablaAutoresLibro.setDisable(false);
         btnNuevo.setDisable(false);
@@ -287,6 +407,9 @@ public class AutorLibroController implements Initializable {
         txtBuscar.setDisable(false);
     }
 
+    /**
+     * Desactiva los controles de navegación y búsqueda.
+     */
     private void desactivarNavegacion() {
         tablaAutoresLibro.setDisable(true);
         btnNuevo.setDisable(true);
@@ -298,6 +421,10 @@ public class AutorLibroController implements Initializable {
         txtBuscar.setDisable(true);
     }
 
+    /**
+     * Muestra un mensaje de error.
+     * @param mensaje Texto que se mostrará en la alerta.
+     */
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -306,6 +433,10 @@ public class AutorLibroController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Muestra un mensaje de advertencia.
+     * @param mensaje Texto que se mostrará en la alerta.
+     */
     private void mostrarAdvertencia(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Advertencia");
@@ -313,5 +444,4 @@ public class AutorLibroController implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-
 }
