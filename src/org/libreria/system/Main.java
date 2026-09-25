@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.libreria.manager.SesionContext;
 
 import org.libreria.model.Usuario;
 

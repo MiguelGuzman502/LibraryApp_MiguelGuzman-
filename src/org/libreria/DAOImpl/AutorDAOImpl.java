@@ -11,13 +11,13 @@ import org.libreria.model.Autor;
 import org.libreria.util.Conexion;
 
 /**
- * Implementación de la interfaz {@link AutorDAO} para gestionar
+ * Implementación de la interfaz {@link AutorDao} para gestionar
  * las operaciones de acceso a datos relacionadas con los autores.
  * Utiliza procedimientos almacenados para realizar las operaciones
  * de consulta, creación, actualización y eliminación de autores.
  * @author Miguel Guzman
  * @version 1.0.0
- * @see AutorDAO
+ * @see AutorDao
  * @see Autor
  * @see Conexion
  */
