@@ -40,6 +40,10 @@ public class Libro {
         this.stock = stock;
     }
 
+    public Libro() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     /**
      * Obtiene el ISBN del libro.
      * @return El ISBN del libro.
