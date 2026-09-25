@@ -1,11 +1,9 @@
+package org.libreria.DAO;
 import java.util.ArrayList;
 
 /**
  * Define las operaciones básicas para la gestión de entidades
- * dentro del sistema mediante operaciones CRUD.
- *
- * @param <T> Tipo de entidad que se desea gestionar.
- * @param <K> Tipo de dato utilizado como identificador de la entidad.
+ * dentro del sistema mediante operaciones CRUD. 
  *
  * @author Miguel Guzman 
  * @version 1.0.0
