@@ -1,4 +1,3 @@
-
 package org.libreria.DAOImpl;
 
 import java.sql.CallableStatement;
@@ -11,8 +10,25 @@ import org.libreria.exception.DaoException;
 import org.libreira.model.Autor;
 import org.libreria.util.Conexion;
 
+/**
+ * Implementación de la interfaz {@link AutorDAO} para gestionar
+ * las operaciones de acceso a datos relacionadas con los autores.
+ * Utiliza procedimientos almacenados para realizar las operaciones
+ * de consulta, creación, actualización y eliminación de autores.
+ * @author Miguel Guzman
+ * @version 1.0.0
+ * @see AutorDAO
+ * @see Autor
+ * @see Conexion
+ */
 public class AutorDAOImpl implements AutorDAO {
 
+    /**
+     * Obtiene todos los autores registrados en la base de datos.
+     * @return Lista que contiene todos los autores registrados.
+     * @throws DaoException si ocurre un error al consultar
+     *         la información de los autores.
+     */
     @Override
     public ArrayList<Autor> listarTodos() {
         ArrayList<Autor> lista = new ArrayList<>();
@@ -35,6 +51,12 @@ public class AutorDAOImpl implements AutorDAO {
         return lista;
     }
 
+    /**
+     * Busca un autor por medio de su identificador.
+     * @param idAutor Identificador del autor que se desea buscar.
+     * @return Autor encontrado o null si no existe.
+     * @throws DaoException si ocurre un error al realizar la consulta.
+     */
     @Override
     public Autor buscarPorId(Integer idAutor) {
         Autor a = null;
@@ -58,6 +80,14 @@ public class AutorDAOImpl implements AutorDAO {
         return a;
     }
 
+    /**
+     * Registra un nuevo autor en la base de datos.
+     * @param autor Autor que se desea registrar.
+     * @return true si el autor fue creado correctamente;
+     *         false en caso contrario.
+     * @throws DaoException si ocurre un error al insertar
+     *         la información del autor.
+     */
     @Override
     public boolean crear(Autor autor) {
         String sql = "{call sp_insertarautor(?,?,?,?)}";
@@ -73,6 +103,14 @@ public class AutorDAOImpl implements AutorDAO {
         }
     }
 
+    /**
+     * Actualiza la información de un autor existente.
+     * @param autor Autor que contiene los datos actualizados.
+     * @return true si el autor fue actualizado correctamente;
+     *         false en caso contrario.
+     * @throws DaoException si ocurre un error al actualizar
+     *         la información del autor.
+     */
     @Override
     public boolean actualizar(Autor autor) {
         String sql = "{call sp_actualizarautor(?,?,?,?,?)}";
@@ -89,6 +127,14 @@ public class AutorDAOImpl implements AutorDAO {
         }
     }
 
+    /**
+     * Elimina un autor de la base de datos utilizando su identificador.
+     * @param idAutor Identificador del autor que se desea eliminar.
+     * @return true si el autor fue eliminado correctamente;
+     *         false en caso contrario.
+     * @throws DaoException si ocurre un error al eliminar
+     *         la información del autor.
+     */
     @Override
     public boolean eliminar(Integer idAutor) {
         String sql = "{call sp_eliminarautor(?)}";
