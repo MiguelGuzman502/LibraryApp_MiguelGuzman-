@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.libreria.DAOImpl;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,8 +10,27 @@ import org.libreria.exception.DaoException;
 import org.libreria.model.LineaFactura;
 import org.libreria.util.Conexion;
 
+/**
+ * Implementación de la interfaz {@link FacturaDAO} para realizar
+ * las operaciones de consulta relacionadas con las facturas.
+ * Utiliza procedimientos almacenados para obtener la información
+ * detallada de una factura.
+ * @author Miguel Guzman
+ * @version 1.0.0
+ * @see FacturaDAO
+ * @see LineaFactura
+ * @see Conexion
+ */
 public class FacturaDAOImpl implements FacturaDAO {
 
+    /**
+     * Busca la información de una factura mediante el número de venta.
+     * @param noVenta Número de venta que identifica la factura que se desea consultar.
+     * @return Lista que contiene las líneas y la información correspondiente
+     *         a la factura consultada.
+     * @throws DaoException si ocurre un error al consultar la información
+     *         de la factura en la base de datos.
+     */
     @Override
     public ArrayList<LineaFactura> buscarFactura(int noVenta) {
         ArrayList<LineaFactura> lista = new ArrayList<>();
