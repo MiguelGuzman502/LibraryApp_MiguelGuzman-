@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.libreria.dao.FacturaDAO;
+import org.libreria.DAO.FacturaDAO;
 import org.libreria.exception.DaoException;
 import org.libreria.model.LineaFactura;
 import org.libreria.util.Conexion;

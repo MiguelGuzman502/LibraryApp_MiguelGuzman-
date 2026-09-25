@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.libreria.dao.AutorDAO;
+import org.libreria.DAO.AutorDao;
 import org.libreria.exception.DaoException;
 import org.libreria.model.Autor;
 import org.libreria.util.Conexion;
@@ -21,7 +21,7 @@ import org.libreria.util.Conexion;
  * @see Autor
  * @see Conexion
  */
-public class AutorDAOImpl implements AutorDAO {
+public class AutorDAOImpl implements AutorDao {
 
     /**
      * Obtiene todos los autores registrados en la base de datos.

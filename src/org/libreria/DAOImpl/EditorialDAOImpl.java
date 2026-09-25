@@ -5,10 +5,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.libreria.dao.EditorialDAO;
+import org.libreria.DAO.EditorialDAO;
 import org.libreria.exception.DaoException;
 import org.libreria.model.Editorial;
-import org.libria.util.Conexion;
+import org.libreria.util.Conexion;
+
 
 /**
  * Implementación de la interfaz {@link EditorialDAO} para gestionar
