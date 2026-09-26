@@ -3,11 +3,12 @@ package org.libreria.system;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.libreria.manager.SesionContext;
-
 import org.libreria.model.Usuario;
 
 /**
@@ -54,7 +55,6 @@ public class Main extends Application {
      */
     public static String rutaDashboardSegunRol() {
 
-   
         Usuario usuario =
                 SesionContext.getInstancia().getUsuarioActual();
 
@@ -75,9 +75,6 @@ public class Main extends Application {
             default:
                 return "/org/libreria/view/fxml/InicioSesionView.fxml";
         }
-
-
-        return "/org/libreria/view/fxml/InicioSesionView.fxml";
     }
 
     /**
