@@ -3,20 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/model/DetalleVenta.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/model/LineaVenta.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/model/Venta.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/DAOImpl/AutorDAOImpl.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/DAO/CategoriaDAO.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/DAO/Crud.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/model/Autor.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/DAO/AutorDao.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/DAO/AutorLibroDAO.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/DAOImpl/ClienteDAOImpl.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/model/Usuario.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/system/Main.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/model/AutorLibro.java</file>
-            <file>file:/C:/miguel_guzman/semana_6/LibraryApp_MiguelGuzman-/src/org/libreria/model/LineaFactura.java</file>
+            <file>file:/C:/miguel_guzman3/Bim_4/LibraryApp_MiguelGuzman-/src/org/libreria/system/Main.java</file>
+            <file>file:/C:/miguel_guzman3/Bim_4/LibraryApp_MiguelGuzman-/src/org/libreria/util/Conexion.java</file>
+            <file>file:/C:/miguel_guzman3/Bim_4/LibraryApp_MiguelGuzman-/src/org/libreria/util/SecurityUtil.java</file>
+            <file>file:/C:/miguel_guzman3/Bim_4/LibraryApp_MiguelGuzman-/src/org/libreria/DAO/AutorDao.java</file>
+            <file>file:/C:/miguel_guzman3/Bim_4/LibraryApp_MiguelGuzman-/src/org/libreria/controller/UsuarioController.java</file>
         </group>
     </open-files>
 </project-private>
