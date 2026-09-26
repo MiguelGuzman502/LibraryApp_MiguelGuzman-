@@ -1,8 +1,4 @@
 package org.libreria.controller;
-
-import java.awt.Button;
-import java.awt.TextField;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -11,10 +7,13 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import org.libreria.DAO.CategoriaDAO;
 import org.libreria.DAO.EditorialDAO;
 import org.libreria.DAO.LibroDAO;
@@ -96,7 +95,6 @@ public class LibroController implements Initializable {
 
     /**
      * Inicializa la pantalla de libros.
-     *
      * @param location ubicación utilizada para resolver las rutas.
      * @param resources recursos utilizados por la interfaz.
      */
@@ -525,7 +523,6 @@ public class LibroController implements Initializable {
 
     /**
      * Muestra un mensaje de error en pantalla.
-     *
      * @param mensaje mensaje que se mostrará.
      */
     private void mostrarError(String mensaje) {
@@ -538,7 +535,6 @@ public class LibroController implements Initializable {
 
     /**
      * Muestra un mensaje de advertencia en pantalla.
-     *
      * @param mensaje mensaje que se mostrará.
      */
     private void mostrarAdvertencia(String mensaje) {

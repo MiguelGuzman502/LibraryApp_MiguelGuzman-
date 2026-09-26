@@ -1,21 +1,21 @@
 package org.libreria.controller;
 
-import java.awt.Button;
 import java.io.IOException;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import org.libreria.manager.SesionContext;
 import org.libreria.model.Usuario;
 import org.libreria.system.Main;
-import org.libreria.manager.SesionContext;
 
 /**
  * Controlador de la pantalla principal para los empleados.
@@ -23,25 +23,38 @@ import org.libreria.manager.SesionContext;
  * @version 1.0.0
  */
 public class EmpleadoController implements Initializable {
-
-    @FXML private Label lblBienvenida;
-    @FXML private Label lblRol;
-    @FXML private Button btnCerrarSesion;
-    @FXML private Circle avatarCircle;
-
-    @FXML private Button btnInventario;
-    @FXML private Button btnLibro;
-    @FXML private Button btnAutor;
-    @FXML private Button btnCategoria;
-    @FXML private Button btnEditorial;
-    @FXML private Button btnClientes;
-
-    @FXML private VBox cardVerInventario;
-    @FXML private VBox cardNuevoLibro;
-    @FXML private VBox cardNuevoAutor;
-    @FXML private VBox cardNuevaCategoria;
-    @FXML private VBox cardNuevaEditorial;
-    @FXML private VBox cardNuevoCliente;
+    @FXML
+    private Label lblBienvenida;
+    @FXML
+    private Label lblRol;
+    @FXML
+    private Button btnCerrarSesion;
+    @FXML
+    private Circle avatarCircle;
+    @FXML
+    private Button btnInventario;
+    @FXML
+    private Button btnLibro;
+    @FXML
+    private Button btnAutor;
+    @FXML
+    private Button btnCategoria;
+    @FXML
+    private Button btnEditorial;
+    @FXML
+    private Button btnClientes;
+    @FXML
+    private VBox cardVerInventario;
+    @FXML
+    private VBox cardNuevoLibro;
+    @FXML
+    private VBox cardNuevoAutor;
+    @FXML
+    private VBox cardNuevaCategoria;
+    @FXML
+    private VBox cardNuevaEditorial;
+    @FXML
+    private VBox cardNuevoCliente;
 
     private Usuario usuarioActual;
 
@@ -143,7 +156,7 @@ public class EmpleadoController implements Initializable {
      */
     @FXML
     public void irAClientes(ActionEvent evento) {
-        navegar("/org/ac/view/fxml/ClienteView.fxml");
+        navegar("/org/libreria/view/fxml/ClienteView.fxml");
     }
 
     /**
@@ -161,7 +174,7 @@ public class EmpleadoController implements Initializable {
      */
     @FXML
     public void nuevoLibro(MouseEvent evento) {
-        navegar("/org/ac/view/fxml/LibroView.fxml");
+        navegar("/org/libreria/view/fxml/LibroView.fxml");
     }
 
     /**

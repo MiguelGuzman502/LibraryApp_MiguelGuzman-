@@ -1,8 +1,5 @@
 package org.libreria.controller;
 
-import java.awt.Button;
-import java.awt.TextField;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -11,11 +8,14 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import org.libreria.DAO.EditorialDAO;
-import org.libreria.dao.impl.EditorialDAOImpl;
+import org.libreria.DAOImpl.EditorialDAOImpl;
 import org.libreria.exception.DaoException;
 import org.libreria.exception.ValidacionException;
 import org.libreria.model.Editorial;
@@ -27,7 +27,6 @@ import org.libreria.system.Main;
  * @version 1.0.0
  */
 public class EditorialController implements Initializable {
-
     @FXML
     private TextField txtNit;
     @FXML
@@ -41,13 +40,14 @@ public class EditorialController implements Initializable {
     @FXML
     private TableView<Editorial> tablaEditoriales;
     @FXML
-    private TableColumn colNit;
+    private TableColumn<Editorial, String> colNit;
     @FXML
-    private TableColumn colNombre;
+    private TableColumn<Editorial, String> colNombre;
     @FXML
-    private TableColumn colTelefono;
+    private TableColumn<Editorial, String> colTelefono;
     @FXML
-    private TableColumn colDireccion;
+    private TableColumn<Editorial, String> colDireccion;
+
     @FXML
     private Button btnNuevo;
     @FXML
@@ -64,8 +64,12 @@ public class EditorialController implements Initializable {
     private TextField txtBuscar;
 
     private boolean modoEdicion = false;
+
     private final EditorialDAO editorialDAO = new EditorialDAOImpl();
-    private final ObservableList<Editorial> listaEditoriales = FXCollections.observableArrayList();
+
+    private final ObservableList<Editorial> listaEditoriales =
+            FXCollections.observableArrayList();
+
     private final FilteredList<Editorial> editorialesFiltradas =
             new FilteredList<>(listaEditoriales, p -> true);
 
@@ -87,10 +91,17 @@ public class EditorialController implements Initializable {
      * Configura las columnas de la tabla de editoriales.
      */
     public void configurarTabla() {
-        colNit.setCellValueFactory(new PropertyValueFactory<Editorial, String>("nit"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Editorial, String>("nombreEditorial"));
-        colTelefono.setCellValueFactory(new PropertyValueFactory<Editorial, String>("telefonoEditorial"));
-        colDireccion.setCellValueFactory(new PropertyValueFactory<Editorial, String>("direccionEditoria"));
+        colNit.setCellValueFactory(
+                new PropertyValueFactory<Editorial, String>("nit"));
+
+        colNombre.setCellValueFactory(
+                new PropertyValueFactory<Editorial, String>("nombreEditorial"));
+
+        colTelefono.setCellValueFactory(
+                new PropertyValueFactory<Editorial, String>("telefonoEditorial"));
+
+        colDireccion.setCellValueFactory(
+                new PropertyValueFactory<Editorial, String>("direccionEditoria"));
     }
 
     /**
@@ -108,7 +119,8 @@ public class EditorialController implements Initializable {
      * Configura el campo de búsqueda de editoriales.
      */
     private void configurarBusqueda() {
-        txtBuscar.textProperty().addListener((obs, oldValue, newValue) -> filtrarEditoriales());
+        txtBuscar.textProperty().addListener(
+                (obs, oldValue, newValue) -> filtrarEditoriales());
     }
 
     /**
@@ -156,6 +168,7 @@ public class EditorialController implements Initializable {
             ValidacionException.validarNoVacio(txtDireccion.getText(), "dirección");
 
             Editorial editorial = new Editorial();
+
             editorial.setNit(txtNit.getText().trim());
             editorial.setNombreEditorial(txtNombre.getText().trim());
             editorial.setTelefonoEditorial(txtTelefono.getText().trim());
@@ -223,7 +236,8 @@ public class EditorialController implements Initializable {
      */
     @FXML
     private void handleEditar() {
-        Editorial seleccion = tablaEditoriales.getSelectionModel().getSelectedItem();
+        Editorial seleccion =
+                tablaEditoriales.getSelectionModel().getSelectedItem();
 
         if (seleccion == null) {
             mostrarError("Seleccione una editorial de la tabla para editar.");
@@ -284,7 +298,8 @@ public class EditorialController implements Initializable {
     private void handleUltimo() {
         if (!tablaEditoriales.getItems().isEmpty()) {
             tablaEditoriales.getSelectionModel().selectLast();
-            tablaEditoriales.scrollTo(tablaEditoriales.getItems().size() - 1);
+            tablaEditoriales.scrollTo(
+                    tablaEditoriales.getItems().size() - 1);
         }
     }
 
@@ -294,7 +309,7 @@ public class EditorialController implements Initializable {
     @FXML
     private void handleVolver() {
         try {
-            Principal.cambiarEscena(Principal.rutaDashboardSegunRol());
+            Main.cambiarEscena(Main.rutaDashboardSegunRol());
         } catch (Exception e) {
             mostrarError("Error al volver al menú: " + e.getMessage());
         }

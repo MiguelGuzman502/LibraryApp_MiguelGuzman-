@@ -1,7 +1,4 @@
-
 package org.libreria.controller;
-
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -10,11 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import org.libreria.DAO.FacturaDAO;
-import org.libreria.dao.impl.FacturaDAOImpl;
+import org.libreria.DAOImpl.FacturaDAOImpl;
 import org.libreria.exception.DaoException;
 import org.libreria.model.LineaFactura;
 import org.libreria.system.Main;
@@ -39,9 +37,9 @@ public class FacturaController implements Initializable {
     }
 
     private final FacturaDAO facturaDAO = new FacturaDAOImpl();
+
     private final ObservableList<LineaFactura> lineasFactura =
             FXCollections.observableArrayList();
-
     @FXML
     private Label lblNoFactura;
     @FXML
@@ -59,15 +57,15 @@ public class FacturaController implements Initializable {
     @FXML
     private TableView<LineaFactura> tablaLineas;
     @FXML
-    private TableColumn colTitulo;
+    private TableColumn<LineaFactura, String> colTitulo;
     @FXML
-    private TableColumn colIsbn;
+    private TableColumn<LineaFactura, String> colIsbn;
     @FXML
-    private TableColumn colCantidad;
+    private TableColumn<LineaFactura, Integer> colCantidad;
     @FXML
-    private TableColumn colPrecioUnitario;
+    private TableColumn<LineaFactura, Double> colPrecioUnitario;
     @FXML
-    private TableColumn colSubtotal;
+    private TableColumn<LineaFactura, Double> colSubtotal;
     @FXML
     private Button btnImprimir;
 
@@ -88,12 +86,16 @@ public class FacturaController implements Initializable {
     public void configurarTabla() {
         colTitulo.setCellValueFactory(
                 new PropertyValueFactory<LineaFactura, String>("tituloLibro"));
+
         colIsbn.setCellValueFactory(
                 new PropertyValueFactory<LineaFactura, String>("isbnLibro"));
+
         colCantidad.setCellValueFactory(
                 new PropertyValueFactory<LineaFactura, Integer>("cantidad"));
+
         colPrecioUnitario.setCellValueFactory(
                 new PropertyValueFactory<LineaFactura, Double>("precioUnitario"));
+
         colSubtotal.setCellValueFactory(
                 new PropertyValueFactory<LineaFactura, Double>("subtotal"));
     }
@@ -123,6 +125,7 @@ public class FacturaController implements Initializable {
             lblCui.setText(String.valueOf(encabezado.getCuiCliente()));
             lblCorreo.setText(encabezado.getCorreoCliente());
             lblUsuario.setText(encabezado.getUsuarioAtendio());
+
             lblTotal.setText(
                     String.format("Q %.2f", encabezado.getGranTotal()));
 
@@ -141,8 +144,8 @@ public class FacturaController implements Initializable {
         try {
             // Regresa a la lista de ventas (origen de la factura),
             // no al dashboard.
-            Principal.cambiarEscena(
-                    "/org/ac/view/fxml/ListaVentasView.fxml");
+            Main.cambiarEscena(
+                    "/org/libreria/view/fxml/ListaVentasView.fxml");
 
         } catch (Exception e) {
             mostrarError("Error al volver al menú: " + e.getMessage());
@@ -164,7 +167,6 @@ public class FacturaController implements Initializable {
 
     /**
      * Muestra un mensaje de error en pantalla.
-     *
      * @param mensaje mensaje que se mostrará.
      */
     private void mostrarError(String mensaje) {

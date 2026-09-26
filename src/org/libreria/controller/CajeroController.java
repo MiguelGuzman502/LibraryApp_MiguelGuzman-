@@ -1,18 +1,20 @@
+package org.libreria.controller;
 
-package org.libreria.controller;import java.awt.Button;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.lang.classfile.Label;
 import java.net.URL;
-import java.security.Principal;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+
 import org.libreria.model.Usuario;
 import org.libreria.manager.SesionContext;
 import org.libreria.system.Main;
@@ -114,3 +116,4 @@ public class CajeroController implements Initializable {
         }
     }
 }
+

@@ -1,8 +1,5 @@
 package org.libreria.controller;
 
-import java.awt.Button;
-import java.awt.TextField;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -11,11 +8,14 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import org.libreria.DAO.DetalleVentaDAO;
 import org.libreria.DAO.LibroDAO;
 import org.libreria.DAO.VentaDAO;
@@ -35,58 +35,40 @@ import org.libreria.system.Main;
  * @version 1.0.0
  */
 public class DetalleVentaController implements Initializable {
-
     @FXML
     private ComboBox<Venta> cmbVenta;
-
     @FXML
     private ComboBox<Libro> cmbLibro;
-
     @FXML
     private TextField txtCantidad;
-
     @FXML
     private TextField txtPrecio;
-
     @FXML
     private Label lblMensaje;
-
     @FXML
     private TableView<DetalleVenta> tablaDetalleVenta;
-
     @FXML
-    private TableColumn colIdDetalleVenta;
-
+    private TableColumn<DetalleVenta, Integer> colIdDetalleVenta;
     @FXML
-    private TableColumn colNoVenta;
-
+    private TableColumn<DetalleVenta, Integer> colNoVenta;
     @FXML
-    private TableColumn colIsbn;
-
+    private TableColumn<DetalleVenta, String> colIsbn;
     @FXML
-    private TableColumn colCantidad;
-
+    private TableColumn<DetalleVenta, Integer> colCantidad;
     @FXML
-    private TableColumn colPrecio;
-
+    private TableColumn<DetalleVenta, Double> colPrecio;
     @FXML
     private Button btnNuevo;
-
     @FXML
     private Button btnEditar;
-
     @FXML
     private Button btnPrimero;
-
     @FXML
     private Button btnAnterior;
-
     @FXML
     private Button btnSiguiente;
-
     @FXML
     private Button btnUltimo;
-
     @FXML
     private TextField txtBuscar;
 
@@ -97,14 +79,15 @@ public class DetalleVentaController implements Initializable {
     private final VentaDAO ventaDAO = new VentaDAOImpl();
     private final LibroDAO libroDAO = new LibroDAOImpl();
 
-    private final ObservableList<DetalleVenta> listaDetalles
-            = FXCollections.observableArrayList();
+    private final ObservableList<DetalleVenta> listaDetalles =
+            FXCollections.observableArrayList();
 
-    private final FilteredList<DetalleVenta> detallesFiltrados
-            = new FilteredList<>(listaDetalles, p -> true);
+    private final FilteredList<DetalleVenta> detallesFiltrados =
+            new FilteredList<>(listaDetalles, p -> true);
 
     /**
      * Inicializa el controlador y configura la tabla, combos y búsqueda.
+     *
      * @param location Ubicación utilizada para resolver recursos.
      * @param resources Recursos utilizados por la interfaz.
      */
@@ -343,8 +326,8 @@ public class DetalleVentaController implements Initializable {
      */
     @FXML
     private void handleEditar() {
-        DetalleVenta seleccion
-                = tablaDetalleVenta.getSelectionModel().getSelectedItem();
+        DetalleVenta seleccion =
+                tablaDetalleVenta.getSelectionModel().getSelectedItem();
 
         if (seleccion == null) {
             mostrarError(
@@ -418,7 +401,7 @@ public class DetalleVentaController implements Initializable {
     @FXML
     private void handleVolver() {
         try {
-            Principal.cambiarEscena(Principal.rutaDashboardSegunRol());
+            Main.cambiarEscena(Main.rutaDashboardSegunRol());
         } catch (Exception e) {
             mostrarError("Error al volver al menú: " + e.getMessage());
         }

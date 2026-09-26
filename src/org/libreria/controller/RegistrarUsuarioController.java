@@ -1,6 +1,4 @@
-
 package org.libreria.controller;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,7 +44,6 @@ public class RegistrarUsuarioController implements Initializable {
     private Button btnVolver;
     @FXML
     private Label lblMensaje;
-
     private UsuarioDAO usuarioDAO;
 
     /**
@@ -67,21 +64,39 @@ public class RegistrarUsuarioController implements Initializable {
     @FXML
     public void eventoRegistrar(ActionEvent evento) {
         try {
-            ValidacionException.validarNoVacio(txtUsuario.getText(), "usuario");
-            ValidacionException.validarNoVacio(txtEmail.getText(), "correo electrónico");
-            ValidacionException.validarFormatoEmail(txtEmail.getText(), "El correo electrónico no es válido.");
-            ValidacionException.validarNoVacio(txtPassword.getText(), "contraseña");
-            ValidacionException.validarNoVacio(txtConfirmarPassword.getText(), "confirmar contraseña");
-            ValidacionException.validarCoinciden(txtPassword.getText(), txtConfirmarPassword.getText(),
+            ValidacionException.validarNoVacio(
+                    txtUsuario.getText(), "usuario");
+
+            ValidacionException.validarNoVacio(
+                    txtEmail.getText(), "correo electrónico");
+
+            ValidacionException.validarFormatoEmail(
+                    txtEmail.getText(),
+                    "El correo electrónico no es válido.");
+
+            ValidacionException.validarNoVacio(
+                    txtPassword.getText(), "contraseña");
+
+            ValidacionException.validarNoVacio(
+                    txtConfirmarPassword.getText(),
+                    "confirmar contraseña");
+
+            ValidacionException.validarCoinciden(
+                    txtPassword.getText(),
+                    txtConfirmarPassword.getText(),
                     "Las contraseñas no coinciden.");
-            ValidacionException.validarLongitudMinima(txtPassword.getText(), 6,
+
+            ValidacionException.validarLongitudMinima(
+                    txtPassword.getText(),
+                    6,
                     "La contraseña debe tener al menos 6 caracteres.");
 
             String usuario = txtUsuario.getText().trim();
             String email = txtEmail.getText().trim();
             String nombre = txtNombre.getText().trim();
             String apellido = txtApellido.getText().trim();
-            String passwordHash = SecurityUtil.hashSHA256(txtPassword.getText());
+            String passwordHash =
+                    SecurityUtil.hashSHA256(txtPassword.getText());
 
             Usuario nuevoUsuario = new Usuario(
                     usuario,
@@ -92,24 +107,39 @@ public class RegistrarUsuarioController implements Initializable {
                     "empleado"
             );
 
-            boolean registrado = usuarioDAO.crearUsuario(nuevoUsuario);
+            boolean registrado =
+                    usuarioDAO.crearUsuario(nuevoUsuario);
 
             if (registrado) {
-                mostrarAlerta(Alert.AlertType.INFORMATION, "Usuario registrado exitosamente.");
-                Principal.cambiarEscena("/org/libreria/view/fxml/InicioSesionView.fxml");
+                mostrarAlerta(
+                        Alert.AlertType.INFORMATION,
+                        "Usuario registrado exitosamente.");
+
+                Main.cambiarEscena(
+                        "/org/libreria/view/fxml/InicioSesionView.fxml");
+
             } else {
-                mostrarAlerta(Alert.AlertType.ERROR, "Error al registrar. El usuario podría ya existir.");
+                mostrarAlerta(
+                        Alert.AlertType.ERROR,
+                        "Error al registrar. El usuario podría ya existir.");
             }
 
         } catch (ValidacionException e) {
-            mostrarAlerta(Alert.AlertType.WARNING, e.getMessage());
+            mostrarAlerta(
+                    Alert.AlertType.WARNING,
+                    e.getMessage());
+
             lblMensaje.setText(e.getMessage());
 
         } catch (IOException e) {
-            System.err.println("Error al volver al login: " + e.getMessage());
+            System.err.println(
+                    "Error al volver al login: " + e.getMessage());
 
         } catch (DaoException e) {
-            mostrarAlerta(Alert.AlertType.ERROR, e.getMessage());
+            mostrarAlerta(
+                    Alert.AlertType.ERROR,
+                    e.getMessage());
+
             lblMensaje.setText("Error al registrar");
         }
     }
@@ -121,9 +151,12 @@ public class RegistrarUsuarioController implements Initializable {
     @FXML
     public void eventoVolver(ActionEvent evento) {
         try {
-            Main.cambiarEscena("/org/libreria/view/fxml/InicioSesionView.fxml");
+            Main.cambiarEscena(
+                    "/org/libreria/view/fxml/InicioSesionView.fxml");
+
         } catch (IOException e) {
-            System.err.println("Error al volver al login: " + e.getMessage());
+            System.err.println(
+                    "Error al volver al login: " + e.getMessage());
         }
     }
 
@@ -132,8 +165,12 @@ public class RegistrarUsuarioController implements Initializable {
      * @param tipo tipo de alerta que se mostrará.
      * @param mensaje mensaje que se mostrará.
      */
-    private void mostrarAlerta(Alert.AlertType tipo, String mensaje) {
-        Alert alerta = new Alert(tipo, mensaje, ButtonType.OK);
+    private void mostrarAlerta(
+            Alert.AlertType tipo, String mensaje) {
+
+        Alert alerta =
+                new Alert(tipo, mensaje, ButtonType.OK);
+
         alerta.showAndWait();
     }
 }

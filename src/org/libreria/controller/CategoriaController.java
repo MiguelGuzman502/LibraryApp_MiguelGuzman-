@@ -1,23 +1,24 @@
 
 package org.libreria.controller;
 
-import java.awt.Button;
-import java.awt.TextField;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
+
 import org.libreria.DAO.CategoriaDAO;
 import org.libreria.DAOImpl.CategoriaDAOImpl;
-import org.libreria.dao.impl.CategoriaDAOImpl;
 import org.libreria.exception.DaoException;
 import org.libreria.exception.ValidacionException;
 import org.libreria.model.Categoria;
@@ -26,10 +27,10 @@ import org.libreria.system.Main;
 /**
  * Controlador de la interfaz gráfica de usuario para la gestión de categorías.
  * Administra la presentación, búsqueda, creación, edición y navegación de registros de {@link Categoria} en JavaFX.
- * @author Alvaro Calderón
- * @version 1.0
+ * @author Miguel Guzman
+ * @version 1.0.0
  * @see javafx.fxml.Initializable
- * @see org.ac.model.Categoria
+ * @see org.libreria.model.Categoria
  */
 public class CategoriaController implements Initializable {
 
@@ -40,9 +41,9 @@ public class CategoriaController implements Initializable {
     @FXML
     private TableView<Categoria> tablaCategorias;
     @FXML
-    private TableColumn colIdCategoria;
+    private TableColumn<Categoria, Integer> colIdCategoria;
     @FXML
-    private TableColumn colNombreCategoria;
+    private TableColumn<Categoria, String> colNombreCategoria;
     @FXML
     private Button btnNuevo;
     @FXML
@@ -60,13 +61,18 @@ public class CategoriaController implements Initializable {
 
     private boolean modoEdicion = false;
     private Categoria enEdicion;
+
     private final CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
-    private final ObservableList<Categoria> listaCategorias = FXCollections.observableArrayList();
-    private final FilteredList<Categoria> categoriasFiltradas = new FilteredList<>(listaCategorias, p -> true);
+
+    private final ObservableList<Categoria> listaCategorias =
+            FXCollections.observableArrayList();
+
+    private final FilteredList<Categoria> categoriasFiltradas =
+            new FilteredList<>(listaCategorias, p -> true);
 
     /**
      * Inicializa el controlador al cargar la vista FXML.
-     * Configura el mapeo de columnas, carga los datos desde la base de datos y 
+     * Configura el mapeo de columnas, carga los datos desde la base de datos y
      * establece los escuchadores de eventos para la búsqueda y selección de elementos.
      * @param location La ubicación utilizada para resolver rutas relativas para el objeto raíz, o {@code null}.
      * @param resources Los recursos utilizados para localizar el objeto raíz, o {@code null}.
@@ -84,8 +90,11 @@ public class CategoriaController implements Initializable {
      * Configura las columnas de la tabla vinculando las propiedades del modelo {@link Categoria}.
      */
     public void configurarTabla() {
-        colIdCategoria.setCellValueFactory(new PropertyValueFactory<Categoria, Integer>("idCategoria"));
-        colNombreCategoria.setCellValueFactory(new PropertyValueFactory<Categoria, String>("nombreCategoria"));
+        colIdCategoria.setCellValueFactory(
+                new PropertyValueFactory<Categoria, Integer>("idCategoria"));
+
+        colNombreCategoria.setCellValueFactory(
+                new PropertyValueFactory<Categoria, String>("nombreCategoria"));
     }
 
     /**
@@ -103,7 +112,8 @@ public class CategoriaController implements Initializable {
      * Configura un escuchador de cambio de texto en el campo de búsqueda para filtrar la tabla dinámicamente.
      */
     private void configurarBusqueda() {
-        txtBuscar.textProperty().addListener((obs, oldValue, newValue) -> filtrarCategorias());
+        txtBuscar.textProperty().addListener(
+                (obs, oldValue, newValue) -> filtrarCategorias());
     }
 
     /**
@@ -112,6 +122,7 @@ public class CategoriaController implements Initializable {
      */
     private void filtrarCategorias() {
         String busqueda = txtBuscar.getText().trim().toLowerCase();
+
         if (busqueda.isEmpty()) {
             categoriasFiltradas.setPredicate(p -> true);
         } else {
@@ -122,7 +133,7 @@ public class CategoriaController implements Initializable {
     }
 
     /**
-     * Configura el escuchador de selección de filas en la tabla para reflejar la categoría 
+     * Configura el escuchador de selección de filas en la tabla para reflejar la categoría
      * seleccionada en los campos del formulario.
      */
     private void seleccionarFila() {
@@ -142,13 +153,16 @@ public class CategoriaController implements Initializable {
     @FXML
     private void handleGuardar() {
         try {
-            ValidacionException.validarNoVacio(txtNombre.getText(), "nombre de la categoría");
+            ValidacionException.validarNoVacio(
+                    txtNombre.getText(),
+                    "nombre de la categoría");
 
             Categoria categoria = new Categoria(
                     modoEdicion ? enEdicion.getIdCategoria() : 0,
                     txtNombre.getText().trim());
 
             boolean guardado;
+
             if (modoEdicion) {
                 guardado = categoriaDAO.actualizar(categoria);
             } else {
@@ -159,6 +173,7 @@ public class CategoriaController implements Initializable {
                 lblMensaje.setText(modoEdicion
                         ? "Categoría actualizada exitosamente."
                         : "Categoría registrada exitosamente.");
+
                 cargarTabla();
                 limpiarFormulario();
                 desactivarFormulario();
@@ -167,9 +182,11 @@ public class CategoriaController implements Initializable {
             } else {
                 mostrarError("No se pudo guardar la categoría.");
             }
+
         } catch (ValidacionException e) {
             mostrarAdvertencia(e.getMessage());
             lblMensaje.setText(e.getMessage());
+
         } catch (Exception e) {
             mostrarError("Error al guardar: " + e.getMessage());
         }
@@ -209,11 +226,14 @@ public class CategoriaController implements Initializable {
      */
     @FXML
     private void handleEditar() {
-        Categoria seleccion = tablaCategorias.getSelectionModel().getSelectedItem();
+        Categoria seleccion =
+                tablaCategorias.getSelectionModel().getSelectedItem();
+
         if (seleccion == null) {
             mostrarError("Seleccione una categoría de la tabla para editar.");
             return;
         }
+
         modoEdicion = true;
         enEdicion = seleccion;
         activarFormulario();
@@ -239,8 +259,10 @@ public class CategoriaController implements Initializable {
     private void handleAnterior() {
         if (!tablaCategorias.getItems().isEmpty()) {
             tablaCategorias.getSelectionModel().selectPrevious();
+
             if (tablaCategorias.getSelectionModel().getSelectedIndex() >= 0) {
-                tablaCategorias.scrollTo(tablaCategorias.getSelectionModel().getSelectedIndex());
+                tablaCategorias.scrollTo(
+                        tablaCategorias.getSelectionModel().getSelectedIndex());
             }
         }
     }
@@ -252,8 +274,10 @@ public class CategoriaController implements Initializable {
     private void handleSiguiente() {
         if (!tablaCategorias.getItems().isEmpty()) {
             tablaCategorias.getSelectionModel().selectNext();
+
             if (tablaCategorias.getSelectionModel().getSelectedIndex() >= 0) {
-                tablaCategorias.scrollTo(tablaCategorias.getSelectionModel().getSelectedIndex());
+                tablaCategorias.scrollTo(
+                        tablaCategorias.getSelectionModel().getSelectedIndex());
             }
         }
     }
@@ -265,7 +289,8 @@ public class CategoriaController implements Initializable {
     private void handleUltimo() {
         if (!tablaCategorias.getItems().isEmpty()) {
             tablaCategorias.getSelectionModel().selectLast();
-            tablaCategorias.scrollTo(tablaCategorias.getItems().size() - 1);
+            tablaCategorias.scrollTo(
+                    tablaCategorias.getItems().size() - 1);
         }
     }
 
@@ -275,7 +300,7 @@ public class CategoriaController implements Initializable {
     @FXML
     private void handleVolver() {
         try {
-            Principal.cambiarEscena(Principal.rutaDashboardSegunRol());
+            Main.cambiarEscena(Main.rutaDashboardSegunRol());
         } catch (Exception e) {
             mostrarError("Error al volver al menú: " + e.getMessage());
         }
@@ -332,7 +357,6 @@ public class CategoriaController implements Initializable {
 
     /**
      * Muestra una alerta emergente de tipo Error con el mensaje especificado.
-     *
      * @param mensaje El texto explicativo del error a mostrar.
      */
     private void mostrarError(String mensaje) {
@@ -345,7 +369,6 @@ public class CategoriaController implements Initializable {
 
     /**
      * Muestra una alerta emergente de tipo Advertencia con el mensaje especificado.
-     *
      * @param mensaje El texto explicativo de la advertencia a mostrar.
      */
     private void mostrarAdvertencia(String mensaje) {
@@ -356,3 +379,4 @@ public class CategoriaController implements Initializable {
         alert.showAndWait();
     }
 }
+

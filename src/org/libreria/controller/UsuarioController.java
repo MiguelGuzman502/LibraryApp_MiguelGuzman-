@@ -1,9 +1,4 @@
-
 package org.libreria.controller;
-
-import java.awt.Button;
-import java.awt.TextField;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ResourceBundle;
@@ -24,8 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import org.libreria.DAO.UsuarioDAO;
 import org.libreria.DAOImpl.UsuarioDAOImpl;
 import org.libreria.exception.DaoException;
@@ -101,7 +94,8 @@ public class UsuarioController implements Initializable {
     private Usuario enEdicion;
     private final UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
     private final ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList();
-    private final FilteredList<Usuario> usuariosFiltrados = new FilteredList<>(listaUsuarios, p -> true);
+    private final FilteredList<Usuario> usuariosFiltrados =
+            new FilteredList<>(listaUsuarios, p -> true);
 
     /**
      * Inicializa la pantalla de usuarios y configura sus componentes.
@@ -110,7 +104,9 @@ public class UsuarioController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cmbRol.setItems(FXCollections.observableArrayList("admin", "empleado", "cajero"));
+        cmbRol.setItems(FXCollections.observableArrayList(
+                "admin", "empleado", "cajero"
+        ));
         cargarTabla();
         tablaUsuarios.setItems(usuariosFiltrados);
         seleccionarFila();
@@ -123,14 +119,22 @@ public class UsuarioController implements Initializable {
      * Configura las columnas de la tabla de usuarios.
      */
     public void configurarTabla() {
-        colId.setCellValueFactory(new PropertyValueFactory<Usuario, Integer>("id"));
-        colUsername.setCellValueFactory(new PropertyValueFactory<Usuario, String>("username"));
-        colEmail.setCellValueFactory(new PropertyValueFactory<Usuario, String>("email"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("firstName"));
-        colApellido.setCellValueFactory(new PropertyValueFactory<Usuario, String>("lastName"));
-        colRol.setCellValueFactory(new PropertyValueFactory<Usuario, String>("rol"));
-        colActivo.setCellValueFactory(new PropertyValueFactory<Usuario, Boolean>("activo"));
-        colFecha.setCellValueFactory(new PropertyValueFactory<Usuario, Timestamp>("fechaCreacion"));
+        colId.setCellValueFactory(
+                new PropertyValueFactory<Usuario, Integer>("id"));
+        colUsername.setCellValueFactory(
+                new PropertyValueFactory<Usuario, String>("username"));
+        colEmail.setCellValueFactory(
+                new PropertyValueFactory<Usuario, String>("email"));
+        colNombre.setCellValueFactory(
+                new PropertyValueFactory<Usuario, String>("firstName"));
+        colApellido.setCellValueFactory(
+                new PropertyValueFactory<Usuario, String>("lastName"));
+        colRol.setCellValueFactory(
+                new PropertyValueFactory<Usuario, String>("rol"));
+        colActivo.setCellValueFactory(
+                new PropertyValueFactory<Usuario, Boolean>("activo"));
+        colFecha.setCellValueFactory(
+                new PropertyValueFactory<Usuario, Timestamp>("fechaCreacion"));
     }
 
     /**
@@ -148,7 +152,9 @@ public class UsuarioController implements Initializable {
      * Configura el campo utilizado para buscar usuarios.
      */
     private void configurarBusqueda() {
-        txtBuscar.textProperty().addListener((obs, oldValue, newValue) -> filtrarUsuarios());
+        txtBuscar.textProperty().addListener(
+                (obs, oldValue, newValue) -> filtrarUsuarios()
+        );
     }
 
     /**
@@ -163,7 +169,8 @@ public class UsuarioController implements Initializable {
             usuariosFiltrados.setPredicate(usuario ->
                     String.valueOf(usuario.getId()).contains(busqueda)
                     || usuario.getUsername().toLowerCase().contains(busqueda)
-                    || (usuario.getEmail() != null && usuario.getEmail().toLowerCase().contains(busqueda))
+                    || (usuario.getEmail() != null
+                    && usuario.getEmail().toLowerCase().contains(busqueda))
                     || usuario.getRol().toLowerCase().contains(busqueda));
         }
     }
@@ -201,8 +208,10 @@ public class UsuarioController implements Initializable {
     @FXML
     private void handleGuardar() {
         try {
-            ValidacionException.validarNoVacio(txtUsername.getText(), "username");
-            ValidacionException.validarNoVacio(txtEmail.getText(), "correo electrónico");
+            ValidacionException.validarNoVacio(
+                    txtUsername.getText(), "username");
+            ValidacionException.validarNoVacio(
+                    txtEmail.getText(), "correo electrónico");
             ValidacionException.validarFormatoEmail(
                     txtEmail.getText(),
                     "El correo electrónico no es válido."
@@ -226,14 +235,16 @@ public class UsuarioController implements Initializable {
             if (modoEdicion) {
                 guardado = usuarioDAO.actualizarUsuario(usuario);
             } else {
-                ValidacionException.validarNoVacio(txtPassword.getText(), "contraseña");
+                ValidacionException.validarNoVacio(
+                        txtPassword.getText(), "contraseña");
                 ValidacionException.validarLongitudMinima(
                         txtPassword.getText(),
                         6,
                         "La contraseña debe tener al menos 6 caracteres."
                 );
 
-                usuario.setPasswordHash(SecurityUtil.hashSHA256(txtPassword.getText()));
+                usuario.setPasswordHash(
+                        SecurityUtil.hashSHA256(txtPassword.getText()));
                 guardado = usuarioDAO.crearUsuario(usuario);
             }
 
@@ -296,7 +307,8 @@ public class UsuarioController implements Initializable {
      */
     @FXML
     private void handleEditar() {
-        Usuario seleccion = tablaUsuarios.getSelectionModel().getSelectedItem();
+        Usuario seleccion =
+                tablaUsuarios.getSelectionModel().getSelectedItem();
 
         if (seleccion == null) {
             mostrarError("Seleccione un usuario de la tabla para editar.");
@@ -316,7 +328,8 @@ public class UsuarioController implements Initializable {
      */
     @FXML
     private void handleCambiarPassword() {
-        Usuario seleccion = tablaUsuarios.getSelectionModel().getSelectedItem();
+        Usuario seleccion =
+                tablaUsuarios.getSelectionModel().getSelectedItem();
 
         if (seleccion == null) {
             mostrarError("Seleccione un usuario para cambiar la contraseña.");
@@ -325,12 +338,14 @@ public class UsuarioController implements Initializable {
 
         TextInputDialog dialogo = new TextInputDialog();
         dialogo.setTitle("Cambiar Contraseña");
-        dialogo.setHeaderText("Nueva contraseña para: " + seleccion.getUsername());
+        dialogo.setHeaderText(
+                "Nueva contraseña para: " + seleccion.getUsername());
         dialogo.setContentText("Contraseña:");
 
         dialogo.showAndWait().ifPresent(password -> {
             try {
-                ValidacionException.validarNoVacio(password, "contraseña");
+                ValidacionException.validarNoVacio(
+                        password, "contraseña");
                 ValidacionException.validarLongitudMinima(
                         password,
                         6,
@@ -340,7 +355,8 @@ public class UsuarioController implements Initializable {
                 String hash = SecurityUtil.hashSHA256(password);
 
                 if (usuarioDAO.cambiarPassword(seleccion.getId(), hash)) {
-                    lblMensaje.setText("Contraseña actualizada exitosamente.");
+                    lblMensaje.setText(
+                            "Contraseña actualizada exitosamente.");
                 } else {
                     mostrarError("No se pudo cambiar la contraseña.");
                 }
@@ -359,7 +375,8 @@ public class UsuarioController implements Initializable {
      */
     @FXML
     private void handleDesactivar() {
-        Usuario seleccion = tablaUsuarios.getSelectionModel().getSelectedItem();
+        Usuario seleccion =
+                tablaUsuarios.getSelectionModel().getSelectedItem();
 
         if (seleccion == null) {
             mostrarError("Seleccione un usuario para desactivar.");
@@ -373,14 +390,16 @@ public class UsuarioController implements Initializable {
 
         if (!confirmar(
                 "Desactivar usuario",
-                "¿Desea desactivar al usuario " + seleccion.getUsername() + "?"
+                "¿Desea desactivar al usuario "
+                + seleccion.getUsername() + "?"
         )) {
             return;
         }
 
         try {
             if (usuarioDAO.desactivarUsuario(seleccion.getId())) {
-                lblMensaje.setText("Usuario desactivado exitosamente.");
+                lblMensaje.setText(
+                        "Usuario desactivado exitosamente.");
                 cargarTabla();
             } else {
                 mostrarError("No se pudo desactivar el usuario.");
@@ -396,7 +415,8 @@ public class UsuarioController implements Initializable {
      */
     @FXML
     private void handleEliminar() {
-        Usuario seleccion = tablaUsuarios.getSelectionModel().getSelectedItem();
+        Usuario seleccion =
+                tablaUsuarios.getSelectionModel().getSelectedItem();
 
         if (seleccion == null) {
             mostrarError("Seleccione un usuario para eliminar.");
@@ -418,7 +438,8 @@ public class UsuarioController implements Initializable {
 
         try {
             if (usuarioDAO.eliminarUsuario(seleccion.getId())) {
-                lblMensaje.setText("Usuario eliminado exitosamente.");
+                lblMensaje.setText(
+                        "Usuario eliminado exitosamente.");
                 cargarTabla();
             } else {
                 mostrarError("No se pudo eliminar el usuario.");
@@ -435,7 +456,8 @@ public class UsuarioController implements Initializable {
      * @return true si es el usuario actual; false en caso contrario.
      */
     private boolean esUsuarioActual(Usuario usuario) {
-        Usuario actual = SesionContext.getInstancia().getUsuarioActual();
+        Usuario actual =
+                SesionContext.getInstancia().getUsuarioActual();
         return actual != null && actual.getId() == usuario.getId();
     }
 
@@ -467,7 +489,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * Selecciona el siguiente usuario en la tabla.
+     * Selecciona el siguiente usuario de la tabla.
      */
     @FXML
     private void handleSiguiente() {
@@ -501,7 +523,8 @@ public class UsuarioController implements Initializable {
         try {
             Main.cambiarEscena(Main.rutaDashboardSegunRol());
         } catch (Exception e) {
-            mostrarError("Error al volver al menú: " + e.getMessage());
+            mostrarError(
+                    "Error al volver al menú: " + e.getMessage());
         }
     }
 
@@ -594,7 +617,8 @@ public class UsuarioController implements Initializable {
         alert.setTitle(titulo);
         alert.setHeaderText(null);
 
-        return alert.showAndWait().orElse(ButtonType.NO) == ButtonType.YES;
+        return alert.showAndWait().orElse(ButtonType.NO)
+                == ButtonType.YES;
     }
 
     /**

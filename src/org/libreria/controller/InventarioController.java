@@ -1,6 +1,4 @@
-
 package org.libreria.controller;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -9,10 +7,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import org.libreria.DAO.LibroDAO;
 import org.libreria.DAOImpl.LibroDAOImpl;
 import org.libreria.exception.DaoException;
@@ -25,22 +23,16 @@ import org.libreria.system.Main;
  * @version 1.0.0
  */
 public class InventarioController implements Initializable {
-
     @FXML
     private TableView<Libro> tablaInventario;
-
     @FXML
-    private TableColumn colIsbn;
-
+    private TableColumn<Libro, String> colIsbn;
     @FXML
-    private TableColumn colTitulo;
-
+    private TableColumn<Libro, String> colTitulo;
     @FXML
-    private TableColumn colPrecio;
-
+    private TableColumn<Libro, Double> colPrecio;
     @FXML
-    private TableColumn colStock;
-
+    private TableColumn<Libro, Integer> colStock;
     @FXML
     private TextField txtBuscar;
 

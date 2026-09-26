@@ -1,8 +1,5 @@
 package org.libreria.controller;
 
-import java.awt.Button;
-import java.awt.TextField;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -12,12 +9,15 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import org.libreria.DAO.ClienteDAO;
 import org.libreria.DAO.UsuarioDAO;
 import org.libreria.DAO.VentaDAO;
@@ -34,7 +34,7 @@ import org.libreria.system.Main;
 
 /**
  * Controlador para gestionar la lista de ventas.
-  * @author Miguel Guzman
+ * @author Miguel Guzman
  * @version 1.0.0
  */
 public class ListaVentasController implements Initializable {

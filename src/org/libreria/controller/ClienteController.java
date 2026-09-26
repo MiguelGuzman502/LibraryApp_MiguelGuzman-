@@ -1,10 +1,6 @@
 
 package org.libreria.controller;
 
-
-import java.awt.Button;
-import java.awt.TextField;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -13,9 +9,12 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 import org.libreria.DAO.ClienteDAO;
 import org.libreria.DAOImpl.ClienteDAOImpl;
 import org.libreria.exception.DaoException;
@@ -23,19 +22,12 @@ import org.libreria.exception.ValidacionException;
 import org.libreria.model.Cliente;
 import org.libreria.system.Main;
 
-import org.libreria.exception.ValidacionException;
-
-import org.libreria.exception.ValidacionException;
-
-import org.libreria.model.Cliente;
-
 /**
  * Controlador para gestionar los clientes de la librería.
  * @author Miguel Guzman
  * @version 1.0.0
  */
 public class ClienteController implements Initializable {
-
     @FXML
     private TextField txtCui;
     @FXML
@@ -47,15 +39,15 @@ public class ClienteController implements Initializable {
     @FXML
     private Label lblMensaje;
     @FXML
-    private TableView<Cliente> tablaClientes;//Tabla de entidad: cliente
+    private TableView<Cliente> tablaClientes;
     @FXML
-    private TableColumn colCUI;
+    private TableColumn<Cliente, Long> colCUI;
     @FXML
-    private TableColumn colNombreCliente;
+    private TableColumn<Cliente, String> colNombreCliente;
     @FXML
-    private TableColumn colApellidoCliente;
+    private TableColumn<Cliente, String> colApellidoCliente;
     @FXML
-    private TableColumn colCorreoElectronico;
+    private TableColumn<Cliente, String> colCorreoElectronico;
     @FXML
     private Button btnNuevo;
     @FXML
@@ -70,16 +62,13 @@ public class ClienteController implements Initializable {
     private Button btnUltimo;
     @FXML
     private TextField txtBuscar;
-
     private boolean modoEdicion = false;
-
     private final ClienteDAO clienteDAO = new ClienteDAOImpl();
+    private final ObservableList<Cliente> listaClientes =
+            FXCollections.observableArrayList();
 
-    private final ObservableList<Cliente> listaClientes
-            = FXCollections.observableArrayList();//Entidad:Cliente
-
-    private final FilteredList<Cliente> clientesFiltrados
-            = new FilteredList<>(listaClientes, p -> true);
+    private final FilteredList<Cliente> clientesFiltrados =
+            new FilteredList<>(listaClientes, p -> true);
 
     /**
      * Inicializa el controlador y configura la tabla y la búsqueda.
@@ -263,8 +252,8 @@ public class ClienteController implements Initializable {
      */
     @FXML
     private void handleEditar() {
-        Cliente seleccion
-                = tablaClientes.getSelectionModel().getSelectedItem();
+        Cliente seleccion =
+                tablaClientes.getSelectionModel().getSelectedItem();
 
         if (seleccion == null) {
             mostrarError("Seleccione un cliente de la tabla para editar.");
@@ -336,7 +325,7 @@ public class ClienteController implements Initializable {
     @FXML
     private void handleVolver() {
         try {
-            Principal.cambiarEscena(Principal.rutaDashboardSegunRol());
+            Main.cambiarEscena(Main.rutaDashboardSegunRol());
         } catch (Exception e) {
             mostrarError("Error al volver al menú: " + e.getMessage());
         }
@@ -424,3 +413,4 @@ public class ClienteController implements Initializable {
         alert.showAndWait();
     }
 }
+

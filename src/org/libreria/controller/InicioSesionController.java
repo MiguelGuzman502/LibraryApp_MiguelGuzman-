@@ -1,26 +1,25 @@
-
 package org.libreria.controller;
 
-import java.awt.Button;
-import java.awt.TextField;
 import java.io.IOException;
-import java.lang.classfile.Label;
-import org.libreria.DAO.UsuarioDAO;
-import org.libreria.DAOImpl.UsuarioDAOImpl;
-import org.libreria.exception.DaoException;
-import org.libreria.exception.ValidacionException;
-import org.libreria.util.SecurityUtil;
-import org.libreria.model.Usuario;
-import org.libreria.system.Main;
-import org.libreria.manager.SesionContext;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import org.libreria.DAO.UsuarioDAO;
+import org.libreria.DAOImpl.UsuarioDAOImpl;
+import org.libreria.exception.DaoException;
+import org.libreria.exception.ValidacionException;
+import org.libreria.manager.SesionContext;
+import org.libreria.model.Usuario;
+import org.libreria.system.Main;
+import org.libreria.util.SecurityUtil;
 
 /**
  * Controlador para iniciar sesión en el sistema.
@@ -28,16 +27,12 @@ import javafx.scene.control.PasswordField;
  * @version 1.0.0
  */
 public class InicioSesionController implements Initializable {
-
     @FXML
     private TextField txtUsuario;
-
     @FXML
     private PasswordField txtPassword;
-
     @FXML
     private Button btnIniciarSesion;
-
     @FXML
     private Label lblMensaje;
 
@@ -114,7 +109,7 @@ public class InicioSesionController implements Initializable {
     @FXML
     public void eventoRegistrarse(ActionEvent evento) {
         try {
-            Principal.cambiarEscena(
+            Main.cambiarEscena(
                     "/org/libreria/view/fxml/RegistrarUsuarioView.fxml");
 
         } catch (IOException e) {
@@ -155,7 +150,7 @@ public class InicioSesionController implements Initializable {
                 throw new AssertionError();
         }
 
-        // String rutaFXML = Principal.rutaDashboardSegunRol();
+        // String rutaFXML = Main.rutaDashboardSegunRol();
         if (rutaDashboard.equals(
                 "/org/libreria/view/fxml/InicioSesionView.fxml")) {
 
