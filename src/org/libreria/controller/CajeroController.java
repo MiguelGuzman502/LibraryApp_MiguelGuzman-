@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import org.libreria.model.Usuario;
 import org.libreria.manager.SesionContext;
+import org.libreria.system.Main;
 
 public class CajeroController implements Initializable {
 
@@ -103,7 +104,7 @@ public class CajeroController implements Initializable {
 
     private void navegar(String ruta) {
         try {
-            Principal.cambiarEscena(ruta);
+            Main.cambiarEscena(ruta);
         } catch (IOException | NullPointerException e) {
             Alert alerta = new Alert(Alert.AlertType.INFORMATION,
                     "Esta sección estará disponible próximamente.", ButtonType.OK);
